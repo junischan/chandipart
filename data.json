@@ -1,1 +1,72 @@
-
+[
+  {
+    "codigo": "EL-001",
+    "descripcion": "Elástico suspensión Ranger",
+    "precio": 250000,
+    "imagen": "imagen/elastic-mecanica.jpg",
+    "categoria": "Mecánica"
+  },
+  {
+    "codigo": "FI-002",
+    "descripcion": "Filtro aceite Hilux",
+    "precio": 45000,
+    "imagen": "imagen/filtro-mecanica.jpg",
+    "categoria": "Mecánica"
+  },
+  {
+    "codigo": "HO-003",
+    "descripcion": "Homocinética Amarok",
+    "precio": 380000,
+    "imagen": "imagen/homosinerica-mecanica.jpg",
+    "categoria": "Mecánica"
+  },
+  {
+    "codigo": "KI-004",
+    "descripcion": "Kit molduras S10",
+    "precio": 120000,
+    "imagen": "imagen/kitmoldura.jpg",
+    "categoria": "Accesorios"
+  },
+  {
+    "codigo": "PA-005",
+    "descripcion": "Paragolpe Ranger 2013",
+    "precio": 950000,
+    "imagen": "imagen/punteraranger2013licrocs-paragolpe.jpg",
+    "categoria": "Paragolpes"
+  },
+  {
+    "codigo": "AC-006",
+    "descripcion": "Tira Barco S10 2008",
+    "precio": 310000,
+    "imagen": "imagen/s10-2008-accesorio.jpeg",
+    "categoria": "Accesorios"
+  },
+  {
+    "codigo": "EL-007",
+    "descripcion": "Soporte antena Ranger",
+    "precio": 75000,
+    "imagen": "imagen/soporteantenaranger025-electricayelectronica.jpg",
+    "categoria": "Eléctrica y Electrónica"
+  },
+  {
+    "codigo": "AC-008",
+    "descripcion": "Tira Barco Hilux 2004+",
+    "precio": 310000,
+    "imagen": "imagen/tira-barco-hilux-2004-accesorio.jpeg",
+    "categoria": "Accesorios"
+  },
+  {
+    "codigo": "AC-009",
+    "descripcion": "Tira Barco universal",
+    "precio": 310000,
+    "imagen": "imagen/tira-barco.jpeg",
+    "categoria": "Accesorios"
+  },
+  {
+    "codigo": "EL-010",
+    "descripcion": "Tomacorriente Ranger",
+    "precio": 65000,
+    "imagen": "imagen/tomacorrienteranger025-.electricayelectronica.jpg",
+    "categoria": "Eléctrica y Electrónica"
+  }
+]

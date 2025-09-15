@@ -68,5 +68,49 @@
     "precio": 65000,
     "imagen": "imagen/tomacorrienteranger025-.electricayelectronica.jpg",
     "categoria": "Eléctrica y Electrónica"
+   },
+  {
+    "codigo": "94772391",
+    "descripcion": "Guardabarro delantero derecho",
+    "precio": 0,
+    "imagen": "imagenes/94772391.jpg",
+    "categoria": "Guardabarro"
+  },
+  {
+    "codigo": "94772390",
+    "descripcion": "Guardabarro delantero izquierdo",
+    "precio": 0,
+    "imagen": "imagenes/94772390.jpg",
+    "categoria": "Guardabarro"
+  },
+  {
+    "codigo": "52017222",
+    "descripcion": "Guardabarro trasero derecho",
+    "precio": 0,
+    "imagen": "imagenes/52017222.jpg",
+    "categoria": "Guardabarro"
+  },
+  {
+    "codigo": "52017221",
+    "descripcion": "Guardabarro trasero izquierdo",
+    "precio": 0,
+    "imagen": "imagenes/52017221.jpg",
+    "categoria": "Guardabarro"
+  },
+  {
+    "codigo": "94716494",
+    "descripcion": "Guardabarro delantero izquierdo (variante)",
+    "precio": 0,
+    "imagen": "imagenes/94716494.jpg",
+    "categoria": "Guardabarro"
+  },
+  {
+    "codigo": "94716493",
+    "descripcion": "Guardabarro delantero derecho (variante)",
+    "precio": 0,
+    "imagen": "imagenes/94716493.jpg",
+    "categoria": "Guardabarro"
   }
+]
+
 ]

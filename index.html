@@ -1,5 +1,5 @@
 
- html
+html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,14 +27,18 @@
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
+            padding-bottom: 60px;
         }
         
         header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
             color: white;
-            padding: 1.5rem;
+            padding: 1.2rem;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .logo {
@@ -46,65 +50,69 @@
         }
         
         .logo-icon {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--secondary);
         }
         
         h1 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             margin-bottom: 5px;
         }
         
         .subtitle {
             font-style: italic;
             opacity: 0.9;
-            margin-bottom: 15px;
+            font-size: 0.9rem;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
         }
         
         .filters {
             background: white;
             border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 25px;
+            padding: 15px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
             align-items: center;
+            position: sticky;
+            top: 80px;
+            z-index: 90;
         }
         
         .search-box {
             flex: 1;
-            min-width: 250px;
+            min-width: 200px;
         }
         
         .search-box input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px 12px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
         
         .category-filter {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         
         .category-btn {
-            padding: 10px 20px;
+            padding: 8px 15px;
             background: var(--light);
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 500;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
         
@@ -120,8 +128,8 @@
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
         }
         
         .product-card {
@@ -130,6 +138,8 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
         
         .product-card:hover {
@@ -138,7 +148,7 @@
         }
         
         .product-image {
-            height: 200px;
+            height: 160px;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -158,77 +168,143 @@
         }
         
         .product-info {
-            padding: 20px;
+            padding: 12px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .product-code {
             color: var(--accent);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 5px;
         }
         
         .product-title {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--dark);
             line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         
         .product-category {
             display: inline-block;
             background: var(--light);
             color: var(--dark);
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 15px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            align-self: flex-start;
         }
         
         .product-price {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--secondary);
-            margin: 10px 0;
+            margin-top: auto;
         }
         
         .consult-price {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--success);
+            margin-top: auto;
         }
         
         footer {
             background: var(--dark);
             color: white;
             text-align: center;
-            padding: 25px;
+            padding: 20px;
             margin-top: 40px;
+            font-size: 0.9rem;
         }
         
-        @media (max-width: 768px) {
-            .filters {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .category-filter {
-                justify-content: center;
-            }
-            
+        /* Estilo Pinterest con columnas variables */
+        @media (min-width: 768px) {
             .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .product-image {
+                height: 200px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            .product-image {
+                height: 220px;
             }
         }
         
         @media (max-width: 480px) {
             .products-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .product-image {
+                height: 140px;
+            }
+            
+            .product-info {
+                padding: 10px;
+            }
+            
+            .product-title {
+                font-size: 0.9rem;
+            }
+            
+            .filters {
+                top: 70px;
             }
             
             .category-btn {
-                padding: 8px 15px;
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        /* Para pantallas muy pequeñas */
+        @media (max-width: 340px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .product-image {
+                height: 120px;
+            }
+            
+            .product-info {
+                padding: 8px;
+            }
+            
+            .product-title {
+                font-size: 0.85rem;
+            }
+            
+            .product-price, .consult-price {
                 font-size: 0.9rem;
             }
         }
@@ -272,112 +348,112 @@
                 "codigo": "EL-001",
                 "descripcion": "Elástico suspensión Ranger",
                 "precio": 250000,
-                "imagen": "imagen/elastic-mecanica.jpg",
+                "imagen": "https://via.placeholder.com/300x200/2c3e50/ffffff?text=Elástico",
                 "categoria": "Mecánica"
             },
             {
                 "codigo": "FI-002",
                 "descripcion": "Filtro aceite Hilux",
                 "precio": 45000,
-                "imagen": "imagen/filtro-mecanica.jpg",
+                "imagen": "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Filtro",
                 "categoria": "Mecánica"
             },
             {
                 "codigo": "HO-003",
                 "descripcion": "Homocinética Amarok",
                 "precio": 380000,
-                "imagen": "imagen/homosinerica-mecanica.jpg",
+                "imagen": "https://via.placeholder.com/300x200/3498db/ffffff?text=Homocinética",
                 "categoria": "Mecánica"
             },
             {
                 "codigo": "KI-004",
                 "descripcion": "Kit molduras S10",
                 "precio": 120000,
-                "imagen": "imagen/kitmoldura.jpg",
+                "imagen": "https://via.placeholder.com/300x200/27ae60/ffffff?text=Kit+Molduras",
                 "categoria": "Accesorios"
             },
             {
                 "codigo": "PA-005",
                 "descripcion": "Paragolpe Ranger 2013",
                 "precio": 950000,
-                "imagen": "imagen/punteraranger2013licrocs-paragolpe.jpg",
+                "imagen": "https://via.placeholder.com/300x200/2c3e50/ffffff?text=Paragolpe",
                 "categoria": "Paragolpes"
             },
             {
                 "codigo": "AC-006",
                 "descripcion": "Tira Barco S10 2008",
                 "precio": 310000,
-                "imagen": "imagen/s10-2008-accesorio.jpeg",
+                "imagen": "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Tira+Barco",
                 "categoria": "Accesorios"
             },
             {
                 "codigo": "EL-007",
                 "descripcion": "Soporte antena Ranger",
                 "precio": 75000,
-                "imagen": "imagen/soporteantenaranger025-electricayelectronica.jpg",
+                "imagen": "https://via.placeholder.com/300x200/3498db/ffffff?text=Soporte+Antena",
                 "categoria": "Eléctrica y Electrónica"
             },
             {
                 "codigo": "AC-008",
                 "descripcion": "Tira Barco Hilux 2004+",
                 "precio": 310000,
-                "imagen": "imagen/tira-barco-hilux-2004-accesorio.jpeg",
+                "imagen": "https://via.placeholder.com/300x200/27ae60/ffffff?text=Tira+Barco",
                 "categoria": "Accesorios"
             },
             {
                 "codigo": "AC-009",
                 "descripcion": "Tira Barco universal",
                 "precio": 310000,
-                "imagen": "imagen/tira-barco.jpeg",
+                "imagen": "https://via.placeholder.com/300x200/2c3e50/ffffff?text=Tira+Universal",
                 "categoria": "Accesorios"
             },
             {
                 "codigo": "EL-010",
                 "descripcion": "Tomacorriente Ranger",
                 "precio": 65000,
-                "imagen": "imagen/tomacorrienteranger025-electricayelectronica.jpg",
+                "imagen": "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Tomacorriente",
                 "categoria": "Eléctrica y Electrónica"
             },
             {
                 "codigo": "94772391",
                 "descripcion": "Guardabarro delantero derecho",
                 "precio": 0,
-                "imagen": "imagen/IMG_20250915_133922.jpg",
+                "imagen": "https://via.placeholder.com/300x200/3498db/ffffff?text=Guardabarro",
                 "categoria": "Guardabarro"
             },
             {
                 "codigo": "94772390",
                 "descripcion": "Guardabarro delantero izquierdo",
                 "precio": 0,
-                "imagen": "imagen/94772390.jpg",
+                "imagen": "https://via.placeholder.com/300x200/27ae60/ffffff?text=Guardabarro",
                 "categoria": "Guardabarro"
             },
             {
                 "codigo": "52017222",
                 "descripcion": "Guardabarro trasero derecho",
                 "precio": 0,
-                "imagen": "imagen/52017222.jpg",
+                "imagen": "https://via.placeholder.com/300x200/2c3e50/ffffff?text=Guardabarro",
                 "categoria": "Guardabarro"
             },
             {
                 "codigo": "52017221",
                 "descripcion": "Guardabarro trasero izquierdo",
                 "precio": 0,
-                "imagen": "imagen/221.jpg",
+                "imagen": "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Guardabarro",
                 "categoria": "Guardabarro"
             },
             {
                 "codigo": "94716494",
                 "descripcion": "Guardabarro delantero izquierdo (variante)",
                 "precio": 0,
-                "imagen": "imagen/94716494.jpg",
+                "imagen": "https://via.placeholder.com/300x200/3498db/ffffff?text=Guardabarro",
                 "categoria": "Guardabarro"
             },
             {
                 "codigo": "94716493",
                 "descripcion": "Guardabarro delantero derecho (variante)",
                 "precio": 0,
-                "imagen": "imagen/493.jpg",
+                "imagen": "https://via.placeholder.com/300x200/27ae60/ffffff?text=Guardabarro",
                 "categoria": "Guardabarro"
             }
         ];
@@ -493,4 +569,3 @@
     </script>
 </body>
 </html>
-```

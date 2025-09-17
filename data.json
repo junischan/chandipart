@@ -11,7 +11,7 @@
     "descripcion": "Filtro aceite Hilux",
     "precio": 45000,
     "imagen": "imagen/filtro-mecanica.jpg",
-    "categoria": "Mecánica"
+    "categoria": "filtros"
   },
   {
     "codigo": "HO-003",
@@ -39,7 +39,7 @@
     "descripcion": "Tira Barco S10 2008",
     "precio": 310000,
     "imagen": "imagen/s10-2008-accesorio.jpeg",
-    "categoria": "Accesorios"
+    "categoria": "motor"
   },
   {
     "codigo": "EL-007",

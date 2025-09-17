@@ -121,8 +121,8 @@
     const WHATSAPP_NUMBER = '595986803963'; // tu número
     const DATA_JSON_URL = 'data.json?v=5';
     const IMG_BASE = './';
-    // Categorías fijas para practicar
-    const CATEGORIES = ['Mecánica', 'Accesorios', 'Paragolpes', 'Eléctrica y Electrónica'];
+    // Categorías fijas para practicar — ¡Ya no se usan! Ahora son dinámicas.
+    // const CATEGORIES = ['Mecánica', 'Accesorios', 'Paragolpes', 'Eléctrica y Electrónica'];
 
     /* ====== ELEMENTOS ====== */
     const elements = {
@@ -154,7 +154,7 @@
     const formatPrice = (n) => new Intl.NumberFormat('es-PY').format(n||0) + " Gs";
     const debounce = (f, w) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>f(...a),w); }; };
     function resolveImage(path){ const safe=encodeURI(path||''); const base=new URL(IMG_BASE, document.baseURI); return new URL(safe, base).href; }
-    function escapeHTML(s){return String(s||'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));}
+    function escapeHTML(s){return String(s||'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'<','>':'>',"'":'&#39;','"':'&quot;'}[m]));}
     function jsStr(s){return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n');}
 
     // Inferencia básica cuando falta "categoria" (sirve para practicar)
@@ -180,8 +180,11 @@
         ITEMS = cached ? JSON.parse(cached) : [];
         if (!cached) console.warn('No data.json ni cache:', e.message);
       }
-      initializeCatalog();
+
+      // ✅ ORDEN CORREGIDO: Primero renderizamos las categorías DINÁMICAS
       renderCategoryFilters();
+      // Luego inicializamos el catálogo, que depende de los filtros ya creados
+      initializeCatalog();
       buildSortBar();
       verifyAssets();
     }
@@ -196,16 +199,28 @@
       wireLightbox();
     }
 
-    /* ====== CABECERA DE CATEGORÍAS (FIJAS) ====== */
+    /* ====== CABECERA DE CATEGORÍAS (DINÁMICAS) ====== */
     function renderCategoryFilters() {
-      const cats = ['Todos', ...CATEGORIES];
+      // Paso 1: Extraer todas las categorías únicas de los productos cargados
+      const uniqueCategories = [...new Set(ITEMS.map(p => getCategory(p)))].sort();
+
+      // Paso 2: Crear la lista de botones, empezando siempre con "Todos"
+      const cats = ['Todos', ...uniqueCategories];
+
+      // Paso 3: Generar el HTML para los botones
       elements.categoryFilters.innerHTML = cats.map((c,idx) =>
         `<button class="filter-btn ${idx===0?'active':''}" data-cat="${c}" aria-pressed="${idx===0?'true':'false'}">${c}</button>`
       ).join('');
+
+      // Paso 4: Volver a asignar los event listeners a los nuevos botones
       elements.categoryFilters.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          elements.categoryFilters.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-          btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+          elements.categoryFilters.querySelectorAll('.filter-btn').forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed','false');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed','true');
           currentCategory = btn.dataset.cat;
           applyFilters();
         });
@@ -401,4 +416,3 @@
 </a>
 </body>
 </html>
-

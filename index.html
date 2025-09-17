@@ -1,534 +1,310 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repuestos de Autos - Paraguay</title>
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #e74c3c;
-            --accent: #3498db;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #27ae60;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding-bottom: 60px;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
-            color: white;
-            padding: 1.2rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-        
-        .logo-icon {
-            font-size: 2.2rem;
-            color: var(--secondary);
-        }
-        
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-        
-        .subtitle {
-            font-style: italic;
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-        
-        .filters {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-            position: sticky;
-            top: 80px;
-            z-index: 90;
-        }
-        
-        .search-box {
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .search-box input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.95rem;
-        }
-        
-        .category-filter {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        
-        .category-btn {
-            padding: 8px 15px;
-            background: var(--light);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        
-        .category-btn:hover {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .category-btn.active {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        /* ESTILO PINTEREST - Masonry layout */
-        .products-grid {
-            column-count: 2;
-            column-gap: 15px;
-        }
-        
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            break-inside: avoid;
-            margin-bottom: 15px;
-            display: inline-block;
-            width: 100%;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-        
-        .product-image {
-            height: 160px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f7f9fc;
-        }
-        
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-        
-        .product-info {
-            padding: 12px;
-        }
-        
-        .product-code {
-            color: var(--accent);
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .product-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--dark);
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .product-category {
-            display: inline-block;
-            background: var(--light);
-            color: var(--dark);
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            margin-bottom: 10px;
-        }
-        
-        .product-price {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-        
-        .consult-price {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--success);
-        }
-        
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive para estilo Pinterest */
-        @media (min-width: 480px) {
-            .products-grid {
-                column-count: 2;
-            }
-        }
-        
-        @media (min-width: 768px) {
-            .products-grid {
-                column-count: 3;
-            }
-            
-            .product-image {
-                height: 180px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .products-grid {
-                column-count: 4;
-            }
-            
-            .product-image {
-                height: 200px;
-            }
-        }
-        
-        @media (max-width: 340px) {
-            .products-grid {
-                column-count: 1;
-            }
-            
-            .product-info {
-                padding: 8px;
-            }
-            
-            .product-title {
-                font-size: 0.85rem;
-            }
-            
-            .product-price, .consult-price {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="logo">
-            <div class="logo-icon">⚙️</div>
-            <div>
-                <h1>Repuestos de Autos</h1>
-                <div class="subtitle">Calidad y confianza para tu vehículo</div>
-            </div>
-        </div>
-    </header>
-    
-    <div class="container">
-        <div class="filters">
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="Buscar repuestos...">
-            </div>
-            
-            <div class="category-filter" id="category-container">
-                <!-- Las categorías se generarán automáticamente con JavaScript -->
-            </div>
-        </div>
-        
-        <div class="products-grid" id="products-container">
-            <!-- Los productos se cargarán aquí con JavaScript -->
-        </div>
-    </div>
-    
-    <footer>
-        <p>© 2023 Repuestos de Autos - Paraguay</p>
-        <p>Ofreciendo los mejores repuestos para tu vehículo</p>
-    </footer>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Catálogo de repuestos automotrices Otto Repuestos (práctica).">
+  <meta name="keywords" content="repuestos, automotriz, Otto Repuestos, práctica, catálogo">
+  <title>Otto Repuestos - Catálogo</title>
+  <base href="./">
+  <style>
+    :root {
+      --primary-bg: #0b0f19;
+      --card-bg: #141a2a;
+      --text-color: #e6e8ee;
+      --accent-color: #25d366;
+      --border-color: #2a3441;
+      --shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      --font-family: system-ui, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    body { margin: 0; background: var(--primary-bg); color: var(--text-color); font-family: var(--font-family); }
+    @media (prefers-color-scheme: light) {
+      :root { --primary-bg:#f5f5f5; --card-bg:#fff; --text-color:#333; --border-color:#ccc; }
+    }
+    .header { padding:20px; background:var(--card-bg); box-shadow:var(--shadow); }
+    h1 { text-align:center; font-size:2em; margin:0 0 20px 0; }
+    .search-container { max-width:500px; margin:0 auto; position:relative; }
+    .search-input { width:100%; padding:12px 50px 12px 20px; border:2px solid var(--border-color); border-radius:25px; background:var(--primary-bg); color:var(--text-color); font-size:16px; box-sizing:border-box; }
+    .search-input:focus { outline:none; border-color:var(--accent-color); }
+    .search-clear { position:absolute; right:15px; top:50%; transform:translateY(-50%); background:none; border:none; color:#a7b0c3; cursor:pointer; font-size:18px; display:none; }
+    .search-clear:hover{ color:var(--text-color); }
+    .controls { display:flex; justify-content:space-between; align-items:center; padding:15px; flex-wrap:wrap; gap:10px; }
+    .filter-buttons { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+    .filter-btn { padding:8px 16px; border:1px solid var(--border-color); border-radius:20px; background:var(--card-bg); color:var(--text-color); cursor:pointer; transition:.3s; font-size:12px; }
+    .filter-btn:hover,.filter-btn.active{ background:var(--accent-color); border-color:var(--accent-color); color:#000; }
+    .stats { font-size:12px; color:#a7b0c3; }
+    .grid{ column-count:2; column-gap:15px; padding:15px; }
+    .card{ background:var(--card-bg); border-radius:10px; box-shadow:var(--shadow); overflow:hidden; margin-bottom:15px; display:inline-block; width:100%; break-inside:avoid; cursor:pointer; transition:transform .2s, box-shadow .2s; position:relative; }
+    .card:hover{ transform:translateY(-2px); box-shadow:0 5px 20px rgba(0,0,0,.4); }
+    .card img{ width:100%; height:auto; object-fit:cover; display:block; background:#0f1529; }
+    .info{ padding:10px; font-size:13px; }
+    .info .codigo{ font-weight:700; font-size:14px; }
+    .info .desc{ color:#a7b0c3; font-size:11px; margin-top:5px; margin-bottom:10px; }
+    .info .precio{ font-weight:700; color:var(--accent-color); font-size:15px; }
+    .card-actions{ padding:0 10px 10px; display:flex; gap:8px; }
+    .btn{ flex:1; padding:8px; border:none; border-radius:5px; cursor:pointer; font-size:11px; font-weight:600; transition:.2s; }
+    .btn-whatsapp{ background:var(--accent-color); color:#000; }
+    .btn-whatsapp:hover{ background:#1ea952; }
+    .btn-share{ background:var(--border-color); color:var(--text-color); }
+    .btn-share:hover{ background:#3a4551; }
+    .cart-float{ position:fixed; bottom:20px; right:20px; background:var(--accent-color); color:#000; border-radius:50%; width:60px; height:60px; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 15px rgba(37,211,102,.3); z-index:999; font-size:24px; transition:.3s; }
+    .cart-float:hover{ transform:scale(1.1); }
+    .cart-count{ position:absolute; top:-5px; right:-5px; background:#ff4444; color:#fff; border-radius:50%; width:20px; height:20px; font-size:10px; display:flex; align-items:center; justify-content:center; font-weight:bold; }
+    .loading{text-align:center; padding:50px; font-size:16px; color:#a7b0c3;}
+    .no-results{text-align:center; padding:50px; color:#a7b0c3;}
+    @media (min-width:600px){ .grid{ column-count:3; } }
+    @media (min-width:900px){ .grid{ column-count:4; } }
+    @media (max-width:600px){ .controls{ flex-direction:column; align-items:stretch; } }
+    .lightbox{ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.9); display:flex; justify-content:center; align-items:center; z-index:1000; visibility:hidden; opacity:0; transition:opacity .3s, visibility .3s; }
+    .lightbox.active{ visibility:visible; opacity:1; }
+    .lightbox-content{ position:relative; max-width:90%; max-height:90%; }
+    .lightbox img{ max-width:100%; max-height:100%; object-fit:contain; background:transparent; }
+    .lightbox-close{ position:absolute; top:-40px; right:0; background:none; border:none; color:#fff; font-size:30px; cursor:pointer; z-index:1001; }
+    .lightbox-info{ position:absolute; bottom:-80px; left:0; right:0; background:rgba(20,26,42,.9); padding:15px; border-radius:8px; text-align:center; }
+    .modal{ position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.8); display:none; align-items:center; justify-content:center; z-index:1000; }
+    .modal.active{ display:flex; }
+    .modal-content{ background:var(--card-bg); padding:20px; border-radius:10px; max-width:500px; width:90%; position:relative; }
+    .modal-close{ position:absolute; top:10px; right:10px; background:none; border:none; color:var(--text-color); font-size:20px; cursor:pointer; }
+    .modal-total{ margin-top:20px; font-weight:bold; }
+    .cart-item{ display:flex; gap:10px; margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:10px; }
+    .cart-item img{ width:50px; height:auto; }
+  </style>
+  /* ====== CONFIG ====== */
+    const WHATSAPP_NUMBER = '595986803963'; // tu número
+    const DATA_JSON_URL = 'data.json?v=5';
+    const IMG_BASE = './';
+    // Categorías fijas para practicar
+    const CATEGORIES = ['Mecánica', 'Accesorios', 'Paragolpes', 'Eléctrica y Electrónica'];
+    // CATEGORÍA POR DEFECTO
+    const DEFAULT_CATEGORY = 'Mecánica'; // <--- CAMBIA ESTO PARA SELECCIONAR OTRA CATEGORÍA POR DEFECTO
 
-    <script>
-// Datos de los productos
-        const products = [
-            {
-                "codigo": "EL-001",
-                "descripcion": "Elástico suspensión Ranger",
-                "precio": 250000,
-                "imagen": "https://via.placeholder.com/300x200/2c3e50/ffffff?text=Elástico",
-                "categoria": "Mecánica"
-            },
-            {
-                "codigo": "FI-002",
-                "descripcion": "Filtro aceite Hilux",
-                "precio": 45000,
-                "imagen": "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Filtro",
-                "categoria": "Mecánica"
-            },
-            {
-                "codigo": "HO-003",
-                "descripcion": "Homocinética Amarok",
-                "precio": 380000,
-                "imagen": "https://via.placeholder.com/300x200/3498db/ffffff?text=Homocinética",
-                "categoria": "Mecánica"
-            },
-            {
-                "codigo": "KI-004",
-                "descripcion": "Kit molduras S10",
-                "precio": 120000,
-                "imagen": "https://via.placeholder.com/300x200/27ae60/ffffff?text=Kit+Molduras",
-                "categoria": "Accesorios"
-            },
-            {
-                "codigo": "PA-005",
-                "descripcion": "Paragolpe Ranger 2013",
-                "precio": 950000,
-                "imagen": "https://via.placeholder.com/300x200/2c3e50/ffffff?text=Paragolpe",
-                "categoria": "Paragolpes"
-            },
-            {
-                "codigo": "AC-006",
-                "descripcion": "Tira Barco S10 2008",
-                "precio": 310000,
-                "imagen": "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Tira+Barco",
-                "categoria": "Accesorios"
-            },
-            {
-                "codigo": "EL-007",
-                "descripcion": "Soporte antena Ranger",
-                "precio": 75000,
-                "imagen": "https://via.placeholder.com/300x200/3498db/ffffff?text=Soporte+Antena",
-                "categoria": "Eléctrica y Electrónica"
-            },
-            {
-                "codigo": "AC-008",
-                "descripcion": "Tira Barco Hilux 2004+",
-                "precio": 310000,
-                "imagen": "https://via.placeholder.com/300x200/27ae60/ffffff?text=Tira+Barco",
-                "categoria": "Accesorios"
-            },
-            {
-                "codigo": "AC-009",
-                "descripcion": "Tira Barco universal",
-                "precio": 310000,
-                "imagen": "https://via.placeholder.com/300x200/2c3e50/ffffff?text=Tira+Universal",
-                "categoria": "Accesorios"
-            },
-            {
-                "codigo": "EL-010",
-                "descripcion": "Tomacorriente Ranger",
-                "precio": 65000,
-                "imagen": "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Tomacorriente",
-                "categoria": "Eléctrica y Electrónica"
-            },
-            {
-                "codigo": "94772391",
-                "descripcion": "Guardabarro delantero derecho",
-                "precio": 0,
-                "imagen": "https://via.placeholder.com/300x200/3498db/ffffff?text=Guardabarro",
-                "categoria": "Guardabarro"
-            },
-            {
-                "codigo": "94772390",
-                "descripcion": "Guardabarro delantero izquierdo",
-                "precio": 0,
-                "imagen": "https://via.placeholder.com/300x200/27ae60/ffffff?text=Guardabarro",
-                "categoria": "Guardabarro"
-            },
-            {
-                "codigo": "52017222",
-                "descripcion": "Guardabarro trasero derecho",
-                "precio": 0,
-                "imagen": "https://via.placeholder.com/300x200/2c3e50/ffffff?text=Guardabarro",
-                "categoria": "Guardabarro"
-            },
-            {
-                "codigo": "52017221",
-                "descripcion": "Guardabarro trasero izquierdo",
-                "precio": 0,
-                "imagen": "https://via.placeholder.com/300x200/e74c3c/ffffff?text=Guardabarro",
-                "categoria": "Guardabarro"
-            },
-            {
-                "codigo": "94716494",
-                "descripcion": "Guardabarro delantero izquierdo (variante)",
-                "precio": 0,
-                "imagen": "https://via.placeholder.com/300x200/3498db/ffffff?text=Guardabarro",
-                "categoria": "Guardabarro"
-            },
-            {
-                "codigo": "94716493",
-                "descripcion": "Guardabarro delantero derecho (variante)",
-                "precio": 0,
-                "imagen": "https://via.placeholder.com/300x200/27ae60/ffffff?text=Guardabarro",
-                "categoria": "Guardabarro"
-            }
-        ];
+    /* ====== ELEMENTOS ====== */
+    const elements = {
+      grid: document.getElementById("grid"),
+      categoryFilters: document.getElementById("categoryFilters"),
+      lightbox: document.getElementById("lightbox"),
+      lightboxImage: document.querySelector("#lightbox img"),
+      lightboxInfo: document.querySelector(".lightbox-info"),
+      searchInput: document.getElementById("searchInput"),
+      searchClear: document.getElementById("searchClear"),
+      itemCount: document.getElementById("itemCount"),
+      loading: document.getElementById("loading"),
+      noResults: document.getElementById("noResults"),
+      cartFloat: document.getElementById("cartFloat"),
+      cartCount: document.getElementById("cartCount"),
+      cartModal: document.getElementById("cartModal"),
+      cartItems: document.getElementById("cartItems"),
+      cartTotal: document.getElementById("cartTotal"),
+      sendCart: document.getElementById("sendCart")
+    };
 
-        // Función para obtener categorías únicas
-        function getUniqueCategories() {
-            const categories = new Set();
-            products.forEach(product => {
-                categories.add(product.categoria);
-            });
-            return Array.from(categories).sort();
-        }
+    /* ====== ESTADO ====== */
+    let ITEMS = [];
+    let filteredItems = [];
+    let cart = JSON.parse(localStorage.getItem('ottocart') || '[]');
+    let currentCategory = DEFAULT_CATEGORY, currentQuery = '', currentSort = 'none';
 
-        // Función para generar los botones de categoría
-        function generateCategoryButtons() {
-            const categories = getUniqueCategories();
-            const container = document.getElementById('category-container');
-            
-            // Botón "Todos"
-            const allButton = document.createElement('button');
-            allButton.className = 'category-btn active';
-            allButton.dataset.category = 'all';
-            allButton.textContent = 'Todos';
-            container.appendChild(allButton);
-            
-            // Botones para cada categoría
-            categories.forEach(category => {
-                const button = document.createElement('button');
-                button.className = 'category-btn';
-                button.dataset.category = category;
-                button.textContent = category;
-                container.appendChild(button);
-            });
-            
-            // Asignar eventos a los botones
-            document.querySelectorAll('.category-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    filterProducts();
-                });
-            });
-        }
+    /* ====== HELPERS ====== */
+    const formatPrice = (n) => new Intl.NumberFormat('es-PY').format(n||0) + " Gs";
+    const debounce = (f, w) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>f(...a),w); }; };
+    function resolveImage(path){ const safe=encodeURI(path||''); const base=new URL(IMG_BASE, document.baseURI); return new URL(safe, base).href; }
+    function escapeHTML(s){return String(s||'').replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]));}
+    function jsStr(s){return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n');}
 
-        // Función para mostrar los productos
-        function displayProducts(productsToShow) {
-            const container = document.getElementById('products-container');
-            container.innerHTML = '';
-            
-            if (productsToShow.length === 0) {
-                container.innerHTML = '<p style="text-align: center; padding: 40px; font-style: italic;">No se encontraron productos que coincidan con tu búsqueda.</p>';
-                return;
-            }
-            
-            productsToShow.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                
-                // Formatear el precio
-                let priceHTML = '';
-                if (product.precio > 0) {
-                    priceHTML = `<div class="product-price">₲ ${product.precio.toLocaleString('es-PY')}</div>`;
-                } else {
-                    priceHTML = `<div class="consult-price">Consultar precio</div>`;
-                }
-                
-                // Imagen por defecto si no hay disponible
-                const imageUrl = product.imagen && product.imagen !== '' ? product.imagen : 'https://via.placeholder.com/300x200?text=Imagen+no+disponible';
-                
-                productCard.innerHTML = `
-                    <div class="product-image">
-                        <img src="${imageUrl}" alt="${product.descripcion}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagen+no+disponible'">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-code">${product.codigo}</div>
-                        <h3 class="product-title">${product.descripcion}</h3>
-                        <span class="product-category">${product.categoria}</span>
-                        ${priceHTML}
-                    </div>
-                `;
-                
-                container.appendChild(productCard);
-            });
-        }
-        
-        // Función para filtrar productos
-        function filterProducts() {
-            const searchText = document.getElementById('search-input').value.toLowerCase();
-            const activeCategory = document.querySelector('.category-btn.active').dataset.category;
-            
-            const filteredProducts = products.filter(product => {
-                const matchesSearch = product.descripcion.toLowerCase().includes(searchText) || 
-                                     product.codigo.toLowerCase().includes(searchText);
-                const matchesCategory = activeCategory === 'all' || product.categoria === activeCategory;
-                
-                return matchesSearch && matchesCategory;
-            });
-            
-            displayProducts(filteredProducts);
-        }
-        
-        // Inicializar la página
-        document.addEventListener('DOMContentLoaded', function() {
-            // Generar botones de categoría
-            generateCategoryButtons();
-            
-            // Mostrar todos los productos al cargar
-            displayProducts(products);
-            
-            // Configurar el buscador
-            document.getElementById('search-input').addEventListener('input', filterProducts);
+    // Inferencia básica cuando falta "categoria" (sirve para practicar)
+    function inferCategory(p){
+      const text = `${p.descripcion||''} ${p.codigo||''} ${p.imagen||''}`.toLowerCase();
+      if (/-paragolpe/.test(text) || /\bparagolpe(s)?\b/.test(text)) return 'Paragolpes';
+      if (/electricayelectronica/.test(text) || /\bel[eé]ctrica\b|\belectr[oó]nica\b/.test(text)) return 'Eléctrica y Electrónica';
+      if (/-mecanica/.test(text) || /\bmec[aá]nica\b/.test(text) || /\bfiltro\b|\baceite\b|\bhomoc[ií]n/.test(text)) return 'Mecánica';
+      if (/-accesorio/.test(text) || /\baccesorio(s)?\b/.test(text) || /tira barco/.test(text)) return 'Accesorios';
+      return 'Accesorios';
+    }
+    function getCategory(p){ return p.categoria || inferCategory(p); }
+    /* ====== CARGA DE DATOS ====== */
+    async function loadData() {
+      elements.loading.style.display = 'block';
+      try {
+        const r = await fetch(DATA_JSON_URL, { cache: 'no-store' });
+        if (!r.ok) throw new Error('HTTP '+r.status);
+        ITEMS = await r.json();
+        localStorage.setItem('ottoData', JSON.stringify(ITEMS));
+      } catch (e) {
+        const cached = localStorage.getItem('ottoData');
+        ITEMS = cached ? JSON.parse(cached) : [];
+        if (!cached) console.warn('No data.json ni cache:', e.message);
+      }
+      initializeCatalog();
+      renderCategoryFilters();
+      buildSortBar();
+      verifyAssets();
+    }
+
+    function initializeCatalog(){
+      elements.loading.style.display = 'none';
+      filteredItems = [...ITEMS];
+      applyFilters();
+      updateCartCount();
+      wireSearch();
+      wireCartModal();
+      wireLightbox();
+    }
+
+    /* ====== CABECERA DE CATEGORÍAS (FIJAS) ====== */
+    function renderCategoryFilters() {
+      const cats = ['Todos', ...CATEGORIES];
+      elements.categoryFilters.innerHTML = cats.map((c,idx) =>
+        `<button class="filter-btn ${c===currentCategory?'active':''}" data-cat="${c}" aria-pressed="${c===currentCategory?'true':'false'}">${c}</button>`
+      ).join('');
+      elements.categoryFilters.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          elements.categoryFilters.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+          btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+          currentCategory = btn.dataset.cat;
+          applyFilters();
         });
-    </script>
+      });
+    }
+
+    /* ====== BARRA DE ORDEN ====== */
+    function buildSortBar(){
+      const bar = document.createElement('div');
+      bar.className='filter-buttons'; bar.id='sortBar'; bar.style.marginTop='6px';
+      bar.innerHTML = `
+        <button class="filter-btn active" data-sort="none" aria-pressed="true">Sin orden</button>
+        <button class="filter-btn" data-sort="price-low" aria-pressed="false">Precio Bajo</button>
+        <button class="filter-btn" data-sort="price-high" aria-pressed="false">Precio Alto</button>
+        <button class="filter-btn" data-sort="recent" aria-pressed="false">Recientes</button>`;
+      elements.categoryFilters.after(bar);
+      bar.querySelectorAll('.filter-btn').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          bar.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});
+          btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+          currentSort = btn.dataset.sort;
+          applyFilters();
+        });
+      });
+    }
+
+    /* ====== BUSCADOR ====== */
+    function wireSearch(){
+      elements.searchInput.addEventListener('input', debounce((e)=>{
+        currentQuery = String(e.target.value||'').toLowerCase().trim();
+        elements.searchClear.style.display = currentQuery ? 'block':'none';
+        applyFilters();
+      },250));
+      elements.searchClear.addEventListener('click', ()=>{
+        elements.searchInput.value=''; currentQuery=''; elements.searchClear.style.display='none'; applyFilters();
+      });
+    }
+
+    /* ====== APLICAR FILTROS ====== */
+    function applyFilters(){
+      let items = (currentCategory==='Todos') ? [...ITEMS] : ITEMS.filter(p=> getCategory(p) === currentCategory);
+      if (currentQuery){
+        const q=currentQuery;
+        items = items.filter(p =>
+          String(p.codigo||'').toLowerCase().includes(q) ||
+          String(p.descripcion||'').toLowerCase().includes(q)
+        );
+      }
+      switch(currentSort){
+        case 'price-low': items.sort((a,b)=>(a.precio||0)-(b.precio||0)); break;
+        case 'price-high': items.sort((a,b)=>(b.precio||0)-(a.precio||0)); break;
+        case 'recent': items = items.slice().reverse(); break;
+      }
+      filteredItems = items;
+      renderItems();
+    }
+
+    /* ====== RENDER ====== */
+    function renderItems(){
+      if (!filteredItems.length){
+        elements.grid.style.display='none'; elements.noResults.style.display='block'; elements.itemCount.textContent='0'; return;
+      }
+      elements.grid.style.display='block'; elements.noResults.style.display='none'; elements.itemCount.textContent=filteredItems.length;
+
+      elements.grid.innerHTML = filteredItems.map(p=>`
+        <article class="card" data-fullimage="${resolveImage(p.imagen)}" data-codigo="${escapeHTML(p.codigo)}" data-desc="${escapeHTML(p.descripcion)}" data-precio="${p.precio||0}">
+          <img src="${resolveImage(p.imagen)}" alt="${escapeHTML(p.descripcion)}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x200/333/fff?text=Sin+Imagen'">
+          <div class="info">
+            <div class="codigo">${escapeHTML(p.codigo)}</div>
+            <div class="desc">${escapeHTML(p.descripcion)}</div>
+            <div class="precio">${formatPrice(p.precio||0)}</div>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-whatsapp" onclick="sendWhatsApp('${jsStr(p.codigo)}','${jsStr(p.descripcion)}',${p.precio||0})">💬 WhatsApp</button>
+            <button class="btn btn-share" onclick="shareProduct('${jsStr(p.codigo)}','${jsStr(p.descripcion)}')">📤 Compartir</button>
+          </div>
+        </article>`).join('');
+
+      document.querySelectorAll(".card").forEach(card=>{
+        card.querySelector('img').addEventListener('click',e=>{e.stopPropagation(); openLightbox(card);});
+        card.addEventListener('dblclick',()=>{ addToCart(card.dataset); toastAdded(card); });
+      });
+    }
+
+    /* ====== LIGHTBOX ====== */
+    function wireLightbox(){
+      elements.lightbox.addEventListener('click',e=>{ if(e.target===elements.lightbox || e.target.classList.contains('lightbox-close')) closeLightbox(); });
+      window.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLightbox(); });
+    }
+    function openLightbox(card){
+      const url=card.dataset.fullimage, cod=card.dataset.codigo, desc=card.dataset.desc, pr=card.dataset.precio;
+      elements.lightboxImage.src=url; elements.lightboxImage.alt=`Imagen ampliada de ${desc}`;
+      elements.lightboxInfo.querySelector('.codigo').textContent=cod;
+      elements.lightboxInfo.querySelector('.desc').textContent=desc;
+      elements.lightboxInfo.querySelector('.precio').textContent=formatPrice(parseInt(pr||'0',10));
+      elements.lightbox.classList.add('active'); elements.lightbox.focus();
+    }
+    function closeLightbox(){ elements.lightbox.classList.remove('active'); }
+
+    /* ====== WHATSAPP / SHARE ====== */
+    function sendWhatsApp(codigo, descripcion, precio){
+      const msg=`¡Hola! Me interesa este repuesto:\n\n📋 Código: ${codigo}\n📝 Descripción: ${descripcion}\n💰 Precio: ${formatPrice(precio||0)}\n\n¿Está disponible?`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
+    }
+    function shareProduct(codigo, descripcion){
+      if (navigator.share){ navigator.share({title:`Otto Repuestos - ${codigo}`, text:descripcion, url:window.location.href}); }
+      else { navigator.clipboard.writeText(`${codigo} - ${descripcion}\n${window.location.href}`).then(()=>alert('Información copiada al portapapeles')); }
+    }
+    window.sendWhatsApp=sendWhatsApp; window.shareProduct=shareProduct;
+
+    // Funciones del carrito
+    function showCartModal(){ /* ... */ }
+    function sendCartToWhatsApp(){ /* ... */ }
+    function addToCart(item){ /* ... */ }
+    function toastAdded(card){ /* ... */ }
+    function removeFromCart(id){ /* ... */ }
+    function updateCartCount(){ elements.cartCount.textContent = cart.length; elements.cartCount.style.display = cart.length ? 'flex' : 'none'; }
+    /* ====== VERIFICADOR ====== */
+    async function verifyAssets(){
+      if (!ITEMS.length) return;
+      const results = await Promise.all(ITEMS.map(i=>new Promise(res=>{
+        const img=new Image(); img.onload=()=>res(true); img.onerror=()=>res(false); img.src=resolveImage(i.imagen);
+      })));
+      const bad = results.filter(ok=>!ok).length;
+      if (bad){
+        elements.noResults.style.display='block';
+        elements.noResults.textContent=`Atención: ${bad} imagen(es) no se encontraron (ver consola).`;
+        setTimeout(()=>{ elements.noResults.style.display='none'; }, 4000);
+      }
+    }
+
+    /* ====== INICIO ====== */
+    loadData();
+    
+  </script>
+<!-- Tu contenido actual aquí -->
+<!-- Botón flotante al Validador -->
+<a href="validador.html" 
+   style="position:fixed;bottom:20px;left:20px;
+          background:#0066cc;color:white;
+          padding:10px 16px;border-radius:8px;
+          font-family:sans-serif;text-decoration:none;
+          box-shadow:0 2px 6px rgba(0,0,0,0.3);">
+  Validador
+</a>
 </body>
 </html>
+

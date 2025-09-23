@@ -1,0 +1,38 @@
+[
+  {
+    "codigo": "EL-001",
+    "descripcion": "Elástico suspensión Ranger",
+    "precio": 250000,
+    "imagen": "imagen/elastic-mecanica.jpg",
+    "categoria": "Mecánica"
+  },
+  {
+    "codigo": "FI-002",
+    "descripcion": "Filtro aceite Hilux",
+    "precio": 45000,
+    "imagen": "imagen/filtro-mecanica.jpg",
+    "categoria": "Mecánica"
+  },
+  {
+    "codigo": "HO-003",
+    "descripcion": "Homocinética Amarok",
+    "precio": 380000,
+    "imagen": "imagen/homosinerica-mecanica.jpg",
+    "categoria": "Mecánica"
+  },
+  {
+    "codigo": "KI-004",
+    "descripcion": "Kit molduras S10",
+    "precio": 120000,
+    "imagen": "imagen/kitmoldura.jpg",
+    "categoria": "Accesorios"
+  },
+  {
+    "codigo": "PA-005",
+    "descripcion": "Puntera Ranger 2013 Licrocs Paragolpe",
+    "precio": 180000,
+    "imagen": "imagen/punteraranger2013licrocs-paragolpe.jpg",
+    "categoria": "Carrocería"
+  }
+
+

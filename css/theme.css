@@ -1,0 +1,188 @@
+/* ==================== THEME ==================== */
+:root{
+  --bg: #0b0f19;
+  --bg-soft: #101728;
+  --glass: rgba(16,23,40,.55);
+  --card: #121a2c;
+  --text: #e6e8ee;
+  --muted: #a7b0c3;
+  --accent: #25d366;
+  --stroke: rgba(255,255,255,.08);
+  --ring: rgba(37,211,102,.25);
+  --shadow: 0 12px 35px rgba(0,0,0,.35);
+  --radius: 16px;
+  --trans: .25s cubic-bezier(.25,.46,.45,.94);
+  --grid-gap: 18px;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f6f7fb; --bg-soft:#f0f2f6; --glass:rgba(255,255,255,.6);
+    --card:#fff; --text:#0f172a; --muted:#52607a; --stroke:#e9edf3; --ring:rgba(37,211,102,.2);
+    --shadow: 0 12px 24px rgba(10,20,40,.08);
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background: radial-gradient(1200px 600px at 20% -10%, #13203a 0%, transparent 60%), var(--bg); color:var(--text); font-family: ui-sans-serif,system-ui,Segoe UI,Roboto,Arial; line-height:1.6;}
+
+/* ==================== HEADER ==================== */
+.topbar{
+  position: sticky; top:0; z-index:1000; backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, var(--glass), transparent);
+  border-bottom: 1px solid var(--stroke);
+}
+.topbar-inner{
+  max-width: 1100px; margin: 0 auto; padding: 16px 14px 10px;
+  display:flex; align-items:center; gap:14px;
+}
+.brand{
+  display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;
+}
+.brand-badge{
+  width:34px;height:34px;border-radius:9px; background: radial-gradient(circle at 30% 25%, #2df08a, #22c55e);
+  box-shadow: 0 8px 22px rgba(34,197,94,.35), inset 0 0 8px rgba(0,0,0,.3);
+  display:grid; place-items:center; color:#06120a; font-weight:900;
+}
+.brand span{opacity:.9}
+
+.search-wrap{ position:relative; flex:1; }
+.search-input{
+  width:100%; padding:12px 44px 12px 40px; border-radius:999px; border:1px solid var(--stroke);
+  background: linear-gradient(180deg,var(--bg-soft),transparent);
+  color:var(--text); font-size:15px; outline:none; transition: border var(--trans), box-shadow var(--trans);
+}
+.search-input:focus{ border-color:var(--accent); box-shadow: 0 0 0 4px var(--ring); }
+.search-ico{ position:absolute; left:14px; top:50%; transform:translateY(-50%); opacity:.65 }
+.search-clear{
+  position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none;
+  color:var(--muted); font-size:18px; display:none; cursor:pointer; padding:6px; border-radius:999px;
+}
+.search-clear:hover{ background: var(--stroke); color:var(--text); }
+
+/* ==================== CONTROLES ==================== */
+.controls{
+  max-width:1100px; margin: 8px auto 0; padding: 0 14px 14px; display:flex; gap:10px; flex-wrap:wrap;
+}
+.chip{
+  display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px;
+  background: var(--card); border:1px solid var(--stroke); box-shadow: var(--shadow);
+}
+.chip label{ font-size:12px; color:var(--muted); }
+.control-select{
+  appearance:none; border:none; background:transparent; color:var(--text); font-weight:600; cursor:pointer; padding-right:20px;
+}
+.control-select:focus{ outline: none; }
+
+/* ==================== ESTADÍSTICA ==================== */
+.stats{ max-width:1100px; margin: 4px auto 8px; padding: 0 14px; font-size:13px; color:var(--muted); }
+
+/* ==================== GRID ==================== */
+.grid{ max-width:1100px; margin: 0 auto; padding: 12px 14px 110px; display:grid; grid-template-columns: repeat(2,1fr); gap: var(--grid-gap); }
+@media (min-width:700px){ .grid{ grid-template-columns: repeat(3,1fr); } }
+@media (min-width:980px){ .grid{ grid-template-columns: repeat(4,1fr); } }
+
+.card{
+  background: linear-gradient(180deg,var(--card),rgba(255,255,255,.02));
+  border:1px solid var(--stroke); border-radius: var(--radius); overflow:hidden; box-shadow: var(--shadow);
+  transition: transform var(--trans), box-shadow var(--trans), border-color var(--trans);
+}
+.card:hover{ transform: translateY(-4px); border-color: rgba(37,211,102,.35); box-shadow: 0 20px 40px rgba(0,0,0,.35); }
+.card .thumb{ width:100%; height:180px; object-fit:cover; display:block; background:#17223a; }
+.info{ padding:12px 12px 6px; }
+.codigo{ font-weight:800; font-size:14px; letter-spacing:.2px; }
+.desc{ font-size:12px; color:var(--muted); margin-top:4px; height: 34px; overflow: hidden; }
+.precio{ font-weight:900; color:var(--accent); margin:10px 12px; }
+
+.card-actions{ display:flex; gap:8px; padding: 0 12px 12px; }
+.btn{
+  flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  border:none; border-radius:10px; padding:10px 12px; cursor:pointer; font-weight:700; font-size:12px; transition: transform var(--trans), box-shadow var(--trans), background var(--trans);
+}
+.btn-whatsapp{ background: var(--accent); color:#05150c; box-shadow: 0 8px 18px rgba(37,211,102,.35); }
+.btn-whatsapp:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(37,211,102,.45); }
+.btn-share{ background: var(--bg-soft); color: var(--text); border:1px solid var(--stroke); }
+.btn-share:hover{ transform: translateY(-1px); }
+
+/* ==================== FAB CARRITO ==================== */
+.cart-float{
+  position: fixed; right: 22px; bottom: 22px; width:66px; height:66px; border-radius:999px;
+  background: linear-gradient(180deg,#37ee92,#25d366); color:#062313; font-size:26px; display:grid; place-items:center;
+  border:none; cursor:pointer; z-index:1100; box-shadow: 0 16px 40px rgba(37,211,102,.45); transition: transform var(--trans), box-shadow var(--trans);
+}
+.cart-float:hover{ transform: translateY(-2px) scale(1.06); }
+.cart-count{
+  position:absolute; top:-6px; right:-6px; width:22px; height:22px; border-radius:999px; background:#ff3b30; color:#fff; display:grid; place-items:center; font-size:11px; font-weight:900; box-shadow: 0 6px 16px rgba(0,0,0,.35);
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse{ 0%{transform:scale(1)} 50%{transform:scale(1.1)} 100%{transform:scale(1)} }
+
+/* ==================== PLACEHOLDERS ==================== */
+.loading, .no-results{
+  max-width:1100px; margin: 18px auto; padding: 28px; background: var(--card); border:1px solid var(--stroke);
+  border-radius: var(--radius); color:var(--muted); text-align:center; box-shadow: var(--shadow);
+}
+
+/* ==================== LIGHTBOX ==================== */
+.lightbox{
+  position:fixed; inset:0; background: rgba(0,0,0,.9); display:flex; align-items:center; justify-content:center;
+  z-index: 10000; visibility:hidden; opacity:0; transition: opacity .25s, visibility .25s;
+}
+.lightbox.active{ visibility:visible; opacity:1; }
+.lightbox-content{ max-width: min(1000px,92vw); max-height: 90vh; display:flex; flex-direction:column; align-items:center; gap:12px; padding: 20px; }
+.lightbox img{ max-width:100%; max-height: 68vh; object-fit:contain; border-radius: 12px; box-shadow: 0 18px 50px rgba(0,0,0,.6); }
+.lightbox-close{ position:absolute; top:18px; right:18px; border:none; background:rgba(255,255,255,.08); color:#fff; font-size:28px; width:44px; height:44px; border-radius:999px; cursor:pointer; }
+.lightbox-close:hover{ background:rgba(255,255,255,.18); transform: rotate(90deg); transition: transform var(--trans); }
+
+/* Info ahora es tarjeta debajo, no overlay */
+.lightbox-info{
+  position: static; width: 100%; max-width: 720px;
+  background: rgba(20,26,42,.95); border:1px solid rgba(255,255,255,.08);
+  padding: 14px 16px; border-radius: 14px; text-align:center; backdrop-filter: blur(10px);
+}
+.lightbox-info .codigo{ font-weight:900; }
+.lightbox-info .desc{ color:#cfd6e6; font-size:14px; margin-top:4px; }
+.lightbox-info .precio{ color:var(--accent); font-weight:900; margin-top:8px; }
+
+/* ==================== MODAL CARRITO ==================== */
+.modal{ position:fixed; inset:0; background: rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:10000; padding:20px; }
+.modal.active{ display:flex; }
+.modal-content{
+  width:min(520px,94vw); background: var(--card); border:1px solid var(--stroke); border-radius: 20px; padding: 26px; box-shadow: var(--shadow); position:relative;
+}
+.modal-close{ position:absolute; right:14px; top:14px; border:none; background:transparent; color:var(--text); font-size:24px; cursor:pointer; }
+.modal h2{ margin:0 0 14px; }
+.modal-total{ margin: 14px 0 10px; text-align:right; color:var(--accent); font-weight:900; }
+.cart-item{ display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--stroke); align-items:center; }
+.cart-item:last-child{ border:none; }
+.cart-item img{ width:62px;height:62px; object-fit:cover; border-radius:10px; background:#182338; }
+.cart-item button{ background: var(--bg-soft); color: var(--text); border:1px solid var(--stroke); width:28px;height:28px;border-radius:999px; cursor:pointer; }
+.cart-item button:hover{ background:#ff3b30; color:#fff; border-color:#ff3b30; }
+
+/* ==================== TOAST ==================== */
+.toast{
+  position:absolute; right:12px; top:12px; background:rgba(37,211,102,.96); color:#062313;
+  padding:7px 12px; border-radius:999px; font-size:12px; font-weight:800; pointer-events:none; opacity:0; transform:translateY(-10px);
+  animation: toastIn .25s forwards, toastOut .25s .9s forwards;
+}
+@keyframes toastIn{ to{opacity:1; transform:translateY(0)} }
+@keyframes toastOut{ to{opacity:0; transform:translateY(-18px)} }
+
+/* ==================== ATALHO VALIDATOR ==================== */
+.validator-link{
+  position:fixed; left:22px; bottom:22px; background:#0b74e5; color:#fff; padding:10px 14px; border-radius:999px; text-decoration:none; font-weight:800; box-shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+.validator-link:hover{ filter:brightness(1.08); transform: translateY(-1px); transition: all var(--trans); }
+#repuestos{
+  max-width:1100px; margin:0 auto; padding:12px 14px 110px;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px;
+}
+.card{
+  background:linear-gradient(180deg,var(--card),rgba(255,255,255,.02));
+  border:1px solid var(--stroke); border-radius:16px; overflow:hidden; box-shadow:var(--shadow);
+  transition:transform .25s, box-shadow .25s, border-color .25s;
+}
+.card:hover{ transform:translateY(-4px); border-color:rgba(37,211,102,.35); box-shadow:0 20px 40px rgba(0,0,0,.35); }
+.card img{ width:100%; height:180px; object-fit:cover; display:block; background:#17223a; }
+.card h3{ margin:12px 12px 6px; font-size:18px; }
+.card p{ margin:4px 12px; color:var(--muted); }
+.card p b{ color:var(--text); }
+
